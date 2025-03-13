@@ -1,4 +1,6 @@
 ---
+layout: ../../layouts/BlogPostLayout.astro
+
 title: "Five Tips for Beginner Photographers"
 date: "2025-03-02"
 tags: ["photography"]
@@ -30,9 +32,12 @@ Suggestions of restrictions to consider next time you’re in a rut:
 
 That isn’t to say there is no benefit to having multiple lenses or a zoom lens - once you become accustomed to composing at different focal lengths it can be great to switch to the right tool and get the shot you want. Equally, there are certain scenarios where having the additional lenses/zoom range simply lets you get shots you otherwise couldn’t. If you find, however, that you’re struggling to find visual cues, it could be from muddled thinking. The restrictions I’ve suggested above can help you get a clearer picture (pun intended) before pressing the shutter.
 
-## Photowalk with Purpose
+## Be Comfortable
 
-As touched on above, muddled thinking can hinder your photography a lot. Now, muddled thinking is not just about lens choice, but can creep in due to many factors. I find that when I am distracted during a photowalk, I struggle to spot visual cues and get shots that I like. Sometimes, that can happen when I decide to take my camera out on a whim, without considering where I want to photograph, what sorts of photos I want to take and what the lighting conditions are overhead.
+<!-- As touched on above, muddled thinking can hinder your photography a lot. Now, muddled thinking is not just about lens choice, but can creep in due to many factors. I find that when I am distracted during a photowalk, I struggle to spot visual cues and get shots that I like. Sometimes, that can happen when I decide to take my camera out on a whim, without considering where I want to photograph, what sorts of photos I want to take and what the lighting conditions are overhead. -->
+
+It's easy to overlook, but don't forget to look after yourself when you're out shooting. Eating and hydrating throughout the day will allow you to photowalk without fatigue. Similarly, wearing comfortable shoes will allow you to stay out for longer,
+getting more shots.
 
 I would like to say that you shouldn't feel that everything has to be prescriptive. You can absolutely get great shots in the most random of places, with very little thinking or totally spontaneously. However, I think for purposeful photowalks, having a plan and being adequately prepared makes a big difference.
 
