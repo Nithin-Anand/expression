@@ -1,10 +1,39 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro"
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { getAlbumImages } from "../utils/albums";
+
+// Fetch the highlights album
+const albums = await getCollection("albums");
+const highlights = albums.find((album) => album.id === "highlights");
+
+// Ensure the highlights album exists
+if (!highlights) {
+  throw new Error("Highlights album not found.");
+}
+
+// Fetch images for the highlights album
+const images = await getAlbumImages(highlights.id);
 ---
 
-<BaseLayout pageTitle="Welcome to Minimally Processed!">
-	<p>Site is under construction, please come back later!
+<BaseLayout pageTitle="Minimally Processed" class="text-center m-4 md:m-16">
+  <div class="text-center mx-4 md:mx-20 lg:mx-28">Welcome to my photography site! I plan to add more here, but for now please browse some of my favourite photos!</div>
 
-		For now, feel free to visit my <a href="https://bsky.app/profile/minimallyprocessed.bsky.social"> BlueSky!</a>
-	</p>
+  <div class="text-center">
+
+    <div
+      class="mx-auto container my-8 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 text-center"
+    >
+      {images.map((image) => (
+        <img
+          src={image.src}
+          alt={`Image from ${highlights.data.title} album`}
+          class="rounded mb-2 border border-transparent hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg"
+          loading="lazy"
+        />
+      ))}
+    </div>
+  </div>
+  <div>
+  </div>
 </BaseLayout>
