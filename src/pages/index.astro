@@ -16,19 +16,19 @@ if (!highlights) {
 const images = await getAlbumImages(highlights.id);
 ---
 
-<BaseLayout pageTitle="Minimally Processed" class="text-center m-4 md:m-16">
-  <div class="text-center mx-4 md:mx-20 lg:mx-28">Welcome to my photography site! I plan to add more here, but for now please browse some of my favourite photos!</div>
+<BaseLayout pageTitle="Minimally Processed" class="text-center p-8 md:p-16">
+  <div class="text-center py-4 sm:py-8 sm:px-12 md:px-20 ">Welcome to my photography site! I plan to add more here, but for now please browse some of my favourite photos!</div>
 
   <div class="text-center">
 
     <div
-      class="mx-auto container my-8 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 text-center"
+      class="mx-auto container px-4 sm:px-8 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 text-center gap-4"
     >
       {images.map((image) => (
         <img
           src={image.src}
           alt={`Image from ${highlights.data.title} album`}
-          class="rounded mb-2 border border-transparent hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg"
+          class="rounded border border-transparent mb-8 hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg"
           loading="lazy"
         />
       ))}
