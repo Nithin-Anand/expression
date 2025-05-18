@@ -3,18 +3,18 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/global.css"
 
-import profileImage from "../assets/photos/profile_abstract.jpg"
+import profileImage from "../assets/photos/abstract_circle.jpg"
 ---
 <BaseLayout pageTitle="About Me">
-    <div class="w-32 md:w-64 h-auto my-8">    
+    <div class="w-48 md:w-80 h-auto my-8">    
         <Image src={profileImage} alt="An abstract picture of myself"/>
     </div>
 
-    <div class="prose lg:prose-xl">
-    <p>Hello there! My name is Nithin, and I am a hobbyist photographer, shooting regularly since 2023.
+    <div class="prose lg:prose-xl mx-2 md:mx-4">
+    <p>Hello there! My name is Nithin, and I am an amateur photographer, shooting regularly since 2023.
     </p>
     <p>
-        Away from the camera, most of my time is spent working as a software engineer. I also enjoy cooking, reading, visiting exhibitions and travel!
+        Away from the camera, most of my time is spent working as a software engineer. I also enjoy cooking, reading, visiting exhibitions and travelling!
     </p>
 </div>
 
