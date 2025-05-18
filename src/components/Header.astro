@@ -1,17 +1,16 @@
 ---
+import Hamburger from "./Hamburger.astro";
 import Navigation from "./Navigation.astro";
+
+// Placeholder for the logo file
+import logo from "../assets/logos/horizontal.svg";
 ---
 
-<header>
-    <nav>
-        <Navigation />
-    </nav>
+<header class="flex justify-between items-center w-full mx-8 p-4">
+    <div class="logo">
+        <a href="/" class="flex items-center">
+            <img src={logo.src} alt="MySite Logo" class="w-32 md:w-48 h-auto align-middle" />
+        </a>
+    </div>
+    <Navigation />
 </header>
-<style>
-    nav {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%; /* Ensure the nav spans the full width */
-    }
-</style>
