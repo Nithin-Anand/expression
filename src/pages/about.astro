@@ -1,10 +1,21 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css"
+
+import profileImage from "../assets/photos/profile_abstract.jpg"
 ---
 <BaseLayout pageTitle="About Me">
-    <p>Hello there! My name is Nithin and I run this site! I am a hobbyist photographer, shooting regularly since 2023. I am still very much a beginner, which is why I created this site now so that you can join
-        me on my journey! Hopefully, some of the mistakes I've made, and lessons I've learned, can be helpful for some of you out there!
-        I also wanted a space to post my photos, without having to fit within the constraints of social media platforms.
+    <div class="w-32 md:w-64 h-auto my-8">    
+        <Image src={profileImage} alt="An abstract picture of myself"/>
+    </div>
+
+    <div class="prose lg:prose-xl">
+    <p>Hello there! My name is Nithin, and I am a hobbyist photographer, shooting regularly since 2023.
     </p>
+    <p>
+        Away from the camera, most of my time is spent working as a software engineer. I also enjoy cooking, reading, visiting exhibitions and travel!
+    </p>
+</div>
 
 </BaseLayout>
