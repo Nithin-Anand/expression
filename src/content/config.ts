@@ -7,6 +7,11 @@ const albums = defineCollection({
       title: z.string(),
       description: z.string().optional(),
       cover: image(),
+      images: z.array(z.object({
+        src: image(),
+        caption: z.string().optional(),
+      })).optional()
+
     }),
 });
 

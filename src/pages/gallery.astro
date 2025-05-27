@@ -4,7 +4,8 @@ import { getCollection } from "astro:content";
 import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const albums = await getCollection("albums");
+let albums = await getCollection("albums");
+albums = albums.filter((item) => item.id !== "portfolio");
 ---
 
 <BaseLayout pageTitle="Albums">
