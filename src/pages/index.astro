@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import { getAlbumImages } from "../utils/albums";
+import { getAlbumImages, getPortfolioImages } from "../utils/albums";
+import { Image } from "astro:assets";
 
 // Fetch the highlights album
 const albums = await getCollection("albums");
@@ -25,8 +26,8 @@ const images = await getAlbumImages(highlights.id);
       class="mx-auto container px-4 sm:px-8 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 text-center gap-4"
     >
       {images.map((image) => (
-        <img
-          src={image.src}
+        <Image
+          src={image}
           alt={`Image from ${highlights.data.title} album`}
           class="rounded border border-transparent mb-4 hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg"
           loading="lazy"
