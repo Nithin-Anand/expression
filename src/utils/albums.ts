@@ -1,4 +1,4 @@
-import { getEntry } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 
 export async function getAlbumImages(albumId: string) {
     // 1. List all album files from collections path
@@ -24,8 +24,11 @@ export async function getAlbumImages(albumId: string) {
 
 // Add this function to load portfolio images from portfolio.yaml
 export async function getPortfolioImages() {
-    const portfolio = await getEntry("albums", "portfolio");
-    if (!portfolio || !portfolio.data.images) return [];
-    return portfolio.data.images;
+  const portfolio = await getEntry("albums", "portfolio");
+
+  if (!portfolio) {
+    throw new Error("Portfolio entry not found");
+  }
+  return portfolio.data.images;
 }
 

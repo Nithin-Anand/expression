@@ -4,17 +4,13 @@ import { getCollection } from "astro:content";
 import { getAlbumImages, getPortfolioImages } from "../utils/albums";
 import { Image } from "astro:assets";
 
-// Fetch the highlights album
-const albums = await getCollection("albums");
-const highlights = albums.find((album) => album.id === "highlights");
+// Fetch the portfolio album
 
-// Ensure the highlights album exists
-if (!highlights) {
-  throw new Error("Highlights album not found.");
-}
+// Ensure the portfolio album exists
 
-// Fetch images for the highlights album
-const images = await getAlbumImages(highlights.id);
+// Fetch images for the portfolio album
+// const images = await getAlbumImages(portfolio.id);
+const images = await getPortfolioImages();
 ---
 
 <BaseLayout pageTitle="Welcome!" class="text-center p-8 md:p-16">
@@ -25,10 +21,10 @@ const images = await getAlbumImages(highlights.id);
     <div
       class="mx-auto container px-4 sm:px-8 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 text-center gap-4"
     >
-      {images.map((image) => (
+      {images && images.map((image) => (
         <Image
-          src={image}
-          alt={`Image from ${highlights.data.title} album`}
+          src={image.src}
+          alt={`Image from portfolio album`}
           class="rounded border border-transparent mb-4 hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg"
           loading="lazy"
         />
