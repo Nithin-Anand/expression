@@ -18,11 +18,13 @@ const albums = defineCollection({
 
 const blog = defineCollection({
   loader: glob({pattern: "**/*.md", base: "./src/content/blog"}),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     date: z.date(),
     description: z.string().optional(),
     draft: z.boolean().optional(),
+    cover: image().optional(),
+    tags: z.array(z.string()).optional(),
   })});
 
 export const collections = {

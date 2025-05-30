@@ -4,13 +4,23 @@ import Navigation from "./Navigation.astro";
 
 // Placeholder for the logo file
 import logo from "../assets/logos/horizontal.svg";
+import smallLogo from "../assets/logos/square_no_tag.svg";
 ---
 
 <header class="flex justify-between items-center w-full mx-8 p-4">
     <div class="logo">
         <a href="/" class="flex items-center">
-            <img src={logo.src} alt="MySite Logo" class="w-40 md:w-48 h-auto align-middle" />
+            <img
+                src={smallLogo.src}
+                alt="MySite Logo"
+                class="w-12 h-12 align-middle md:hidden"
+            />
+            <img
+                src={logo.src}
+                alt="MySite Logo"
+                class="w-40 md:w-48 h-12 align-middle hidden md:block"
+            />
         </a>
     </div>
-    <Navigation />
+    <Navigation class="align-middle"/>
 </header>

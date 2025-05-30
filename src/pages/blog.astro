@@ -1,9 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 let posts = await getCollection("blog");
-// posts = posts.filter((post) => (post.data.draft === false || post.data.draft === undefined));
+posts = posts.filter((post) => (post.data.draft === false || post.data.draft === undefined));
 ---
 <BaseLayout pageTitle="Blog">
   <div class="p-8">
@@ -14,6 +14,18 @@ let posts = await getCollection("blog");
             href={`/blog/${post.id}`}
             class="group transition-all mb-4 block"
           >
+            <Image
+                  src={post.data.cover}
+                  alt={post.data.title}
+                  format="avif"
+                  width={720}
+                  quality="mid"
+                  class:list={[
+                    "rounded-lg transition-all",
+                    "group-hover:shadow-lg group-hover:opacity-90"
+                  ]}
+                />
+
             <h2 class="text-lg font-semibold group-hover:underline">{post.data.title}</h2>
             <p class="text-sm text-neutral-700">{post.data.description}</p>
             <p class="text-xs text-neutral-500">  {new Date(post.data.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
