@@ -47,9 +47,9 @@ I am a tech nerd, so I share and understand the urge to pore over the specs of c
 
 Gear matters, otherwise there wouldn’t be a market for new cameras. Many YouTubers that tell you gear doesn't matter, whilst they carry around a £10,000 set-up. Cameras, and lenses, are tools, and you do need the right tools for the job. If you're a working photographer, reliability and efficiency can directly impact your reputation and profits. Certain genres of photography, like wildlife, will require a telephoto lens no matter how good you are. Good gear can make it easier to get the shot, with their faster autofocus, burst rates and higher-resolution.
 
-However, a lot of photography isn't demanding on gear. For example, most street, travel and portrait photography can be done with a an older crop sensor camera and a simple prime lens. Good lighting and composition, will be the primary differentiator between a good and bad photo. Good gear won't fix a poorly lit, uninteresting composition. That's why people don't recommend a high-end set-up for a beginner, as the dramatic improvements come from improved skills rather than technical specs.
+However, a lot of photography isn't demanding on gear. For example, most street, travel and portrait photography can be done with a an older crop sensor camera and a simple prime lens. Good lighting and composition will be the primary differentiator between a good and bad photo. Good gear won't fix a poorly lit, uninteresting composition. That's why people don't recommend a high-end set-up for a beginner, as the dramatic improvements come from improved skills rather than technical specs.
 
-Cameras don’t go obsolete unlike a lot of tech - people took amazing photos with great image quality many many years ago, and that same equipment can produce the same results today. Getting used gear can bring the cost down a lot too.
+Cameras don’t go obsolete unlike a lot of tech. People took amazing photos with great image quality many years ago, and that same equipment can produce the same results today. Getting used gear can bring the cost down a lot too.
 
 Where gear *does* matter, is that it has to work for you. By that I mean does it meet your own personal, subjective needs? Examples of what I (currently) consider important in a camera include:
 
