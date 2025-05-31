@@ -1,48 +1,69 @@
-# Astro Starter Kit: Basics
+# 📸 Minimally Processed
 
-```sh
-npm create astro@latest -- --template basics
+> *A personal photography portfolio & blog by Nithin Anand*
+
+---
+
+## ✨ Welcome!
+
+**Minimally Processed** is a clean, modern Astro-powered site to showcase my favourite images, share photo stories, and blog about my journey as an amateur photographer. I'm making the source code available here so that you can fork it
+
+---
+
+## 🚀 Features
+
+- **Gallery:** Browse albums from London, Verona, Seven Sisters, and more!
+- **Portfolio:** Handpicked favourite shots with captions.
+- **Blog:** Tips, stories, and thoughts on photography (coming soon).
+- **Responsive Design:** Looks great on any device.
+- **Fast & Minimal:** Built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
+
+---
+
+## 🗂️ Project Structure
+
+```
+src/
+  assets/         # Images, logos, and static assets
+  components/     # Reusable UI components (Header, Footer, Navigation)
+  content/        # Albums and blog posts (YAML & Markdown)
+  layouts/        # Page and post layouts
+  pages/          # Astro pages and routes
+  styles/         # Tailwind/global CSS
+  utils/          # Helper functions
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+---
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 🌐 Deployed With
 
-## 🚀 Project Structure
+- [Astro](https://astro.build/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [@fontsource/poppins](https://fontsource.org/fonts/poppins)
+- [Netlify](https://www.netlify.com/)
 
-Inside of your Astro project, you'll see the following folders and files:
+---
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## 🧑‍💻 Author
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+Made by [Nithin Anand](https://github.com/Nithin-Anand)
 
-## 🧞 Commands
+<!-- ---
 
-All commands are run from the root of the project, from a terminal:
+## 📝 License
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+The code is available under MIT license, but please do not copy or distribute the creative content (namely blog and image content) without permission. -->
 
-## 👀 Want to learn more?
+---
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Credits
+
+- [Jan Kraus](https://jankraus.net/2024/04/05/how-to-build-a-simple-photo-gallery-with-astro/) for the gallery rendering.
+- [Streamline](https://www.streamlinehq.com/) for the social media icons.
+
+--
+
+## 🦄 Enjoy browsing!  
+*Join me on my photographic journey!*
+
