@@ -26,9 +26,9 @@ posts = posts.filter((post) => (post.data.draft === false || post.data.draft ===
                   ]}
                 />
 
-            <h2 class="text-lg font-semibold group-hover:underline">{post.data.title}</h2>
+            <h2 class="text-lg text-center lg:text-left font-semibold group-hover:underline">{post.data.title}</h2>
             <p class="text-sm text-neutral-700">{post.data.description}</p>
-            <p class="text-xs text-neutral-500">  {new Date(post.data.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+            <p class="text-xs text-center lg:text-left text-neutral-500">  {new Date(post.data.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
           </a>
         ))
       }
