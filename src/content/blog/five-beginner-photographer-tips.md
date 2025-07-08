@@ -1,7 +1,7 @@
 ---
 title: "Five Tips for Beginner Photographers"
 date: 2025-05-30
-tags: ["photography"]
+tags: ["photography", "advice"]
 cover: "../albums/misc/NITH0168-2.jpg"
 ---
 As a novice photographer myself, I do not profess to speak with authority on this subject. However, I'm hoping you can gain from some of the advice I've picked up during my journey. 
