@@ -6,17 +6,7 @@
 
 ## ✨ Welcome!
 
-**Minimally Processed** is a clean, modern Astro-powered site to showcase my favourite images, share photo stories, and blog about my journey as an amateur photographer. I'm making the source code available here so that you can fork it
-
----
-
-## 🚀 Features
-
-- **Gallery:** Browse albums from London, Verona, Seven Sisters, and more!
-- **Portfolio:** Handpicked favourite shots with captions.
-- **Blog:** Tips, stories, and thoughts on photography (coming soon).
-- **Responsive Design:** Looks great on any device.
-- **Fast & Minimal:** Built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
+**Minimally Processed** is a clean, modern, Astro-powered site to showcase my favourite images, share photo stories, and blog about my journey as an amateur photographer. I'm making the source code available here so that you can fork it. Until I move to serving the images via CDN, they are contained in this report. I have made this repo open-source in good faith, please do not use the content (blogs and photos) without permission. 
 
 ---
 
@@ -61,9 +51,3 @@ The code is available under MIT license, but please do not copy or distribute th
 
 - [Jan Kraus](https://jankraus.net/2024/04/05/how-to-build-a-simple-photo-gallery-with-astro/) for the gallery rendering.
 - [Streamline](https://www.streamlinehq.com/) for the social media icons.
-
---
-
-## 🦄 Enjoy browsing!  
-*Join me on my photographic journey!*
-
