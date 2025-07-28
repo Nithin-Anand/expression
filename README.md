@@ -6,7 +6,7 @@
 
 ## ✨ Welcome!
 
-**Minimally Processed** is a clean, modern, Astro-powered site to showcase my favourite images, share photo stories, and blog about my journey as an amateur photographer. I'm making the source code available here so that you can fork it. Until I move to serving the images via CDN, they are contained in this report. I have made this repo open-source in good faith, please do not use the content (blogs and photos) without permission. 
+**Minimally Processed** is a clean, modern, Astro-powered site to showcase my favourite images, share photo stories, and blog about my journey as an amateur photographer. I'm making the source code available here so that you can fork it. Until I move to serving the images via CDN, they are contained in this repo. I have made this repo open-source in good faith, please do not use the content (blogs and photos) without permission. 
 
 ---
 
