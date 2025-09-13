@@ -1,0 +1,16 @@
+---
+const response = await fetch("https://api.cloudinary.com/v1_1/minimallyphotos/resources/by_asset_folder?asset_folder=Sample Images")
+const data = await response.json()
+const image = data[0]
+
+import BaseLayout from "../layouts/BaseLayout.astro"
+import { CldImage } from 'astro-cloudinary';
+---
+<BaseLayout page_title=Testing Cloud Image Render>
+<CldImage
+    src={image.url}
+    width={image.width}
+    height={image.height}
+/>
+
+</BaseLayout>
