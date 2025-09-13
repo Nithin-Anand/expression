@@ -1,16 +1,24 @@
 ---
-const response = await fetch("https://api.cloudinary.com/v1_1/minimallyphotos/resources/by_asset_folder?asset_folder=Sample Images")
-const data = await response.json()
-const image = data[0]
-
-import BaseLayout from "../layouts/BaseLayout.astro"
+import { getImagesByFolder } from "../utils/cloudinary";
+import BaseLayout from "../layouts/BaseLayout.astro";
 import { CldImage } from 'astro-cloudinary';
----
-<BaseLayout page_title=Testing Cloud Image Render>
-<CldImage
-    src={image.url}
-    width={image.width}
-    height={image.height}
-/>
 
+// Await the Promise to get the images
+const images = await getImagesByFolder("Sample Images");
+// Get the first image from the array
+const firstImage = images[0];
+
+console.log('First image:', firstImage); // For debugging
+---
+<BaseLayout page_title="Testing Cloud Image Render">
+    {firstImage ? (
+        <CldImage
+            src={firstImage.public_id}
+            width={firstImage.width}
+            height={firstImage.height}
+            alt="Sample image"
+        />
+    ) : (
+        <p>No images found in the folder</p>
+    )}
 </BaseLayout>
