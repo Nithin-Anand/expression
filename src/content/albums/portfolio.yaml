@@ -1,6 +1,7 @@
 title: Portfolio
 description: My Favourite Images
 cover: ./london_street_2025/DSCF2764.jpg
+date: 2050-12-12
 images:
   - src: ./london_street_2025/DSCF2764.jpg
     caption: "The Poultry Silhouette"
