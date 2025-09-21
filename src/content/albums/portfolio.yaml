@@ -1,6 +1,7 @@
 title: Portfolio
 description: My Favourite Images
 cover: ./london_street_2025/DSCF2764.jpg
+date: 2050-12-12
 images:
   - src: ./london_street_2025/DSCF2764.jpg
     caption: "The Poultry Silhouette"
@@ -22,8 +23,6 @@ images:
     caption: "The Passerby"
   - src: ./london_street_2025/NITH3733.jpg
     caption: "Placeholder caption for NITH3733"
-  - src: ./london_street_2025/NITH3757.jpg
-    caption: "Placeholder caption for NITH3757"
   - src: ./london_street_2025/NITH3778_1.jpg
     caption: "Placeholder caption for NITH3778_1"
   - src: ./london_street_2025/NITH3812_4.jpg
@@ -38,17 +37,19 @@ images:
     caption: "A cigarette in the light"
   - src: ./verona/NITH2678.jpg
     caption: "Red Umbrella of Verona"
-  - src: ./seven_sisters/20250405-NITH1433-2.jpg
-    caption: "Woman in a yellow coat taking a picture of the Seven Sisters cliffs"
   - src: ./misc/NITH0168-2.jpg
     caption: "Silhouettes at Musee d'Orsay"
   - src: ./misc/NITH1064.jpg
     caption: "Placeholder caption for NITH1064"
-  - src: ./misc/NITH2754.jpg
-    caption: "Placeholder caption for NITH2754"
   - src: ./misc/NITH4618.jpg
     caption: "Placeholder caption for NITH4618"
   - src: ./misc/NITH4851.jpg
     caption: "Placeholder caption for NITH4851"
   - src: ./misc/NITH7029-3.jpg
     caption: "Placeholder caption for NITH7029-3"
+  - src: ./urban_landscape/NITH7789.jpg
+    caption: "The red roof of a houseboat"
+  - src: ./urban_landscape/NITH7794.jpg
+    caption: "Boats in St. Katharine's Dock"
+  - src: ./urban_landscape/NITH5551.jpg
+    caption: "Classic, cliche view of Parliament in London"

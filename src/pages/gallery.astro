@@ -3,9 +3,14 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { date } from "astro:schema";
 
 let albums = await getCollection("albums");
-albums = albums.filter((item) => item.id !== "portfolio");
+albums = albums
+    .filter((item) => item.id !== "portfolio")
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()
+    );
+
 ---
 
 <BaseLayout pageTitle="Albums">
