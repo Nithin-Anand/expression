@@ -13,12 +13,11 @@ import { Image } from "astro:assets";
 const images = await getPortfolioImages();
 ---
 
-<BaseLayout pageTitle="Minimally Processed Photography" class="text-center p-8 md:p-16">
-  <div class="text-center mx-4 md:text-xl py-4 sm:py-8 sm:px-12 md:px-20 text-gray-600 "><p>Welcome to my photography site. Please browse my photos and blog posts. Join me on my photography journey!</p></div>
+<BaseLayout pageTitle="Minimally Processed" hideTitle=true class="text-center p-8 md:p-16">
   <div class="text-center">
 
     <div
-      class="mx-auto container px-4 sm:px-8 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 text-center gap-4"
+      class="mx-auto container py-8 px-4 sm:px-8 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 text-center gap-4"
     >
       {images && images.map((image) => (
         <Image

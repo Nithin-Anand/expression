@@ -47,9 +47,7 @@ images:
     caption: "Placeholder caption for NITH4851"
   - src: ./misc/NITH7029-3.jpg
     caption: "Placeholder caption for NITH7029-3"
-  - src: ./urban_landscape/NITH7789.jpg
-    caption: "The red roof of a houseboat"
-  - src: ./urban_landscape/NITH7794.jpg
-    caption: "Boats in St. Katharine's Dock"
   - src: ./urban_landscape/NITH5551.jpg
     caption: "Classic, cliche view of Parliament in London"
+  - src: ./mallorca/NITH5857.jpg
+    caption: "A couple walking in Palma, palm trees in the background"
