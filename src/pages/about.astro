@@ -1,22 +1,35 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import "../styles/global.css"
+import "../styles/global.css";
 
-import profileImage from "../assets/photos/abstract_circle.jpg"
+import profileImage from "../assets/photos/abstract_circle.jpg";
 ---
+
 <BaseLayout pageTitle="About Me">
-    <div class="w-48 md:w-80 h-auto my-8">    
-        <Image src={profileImage} alt="An abstract picture of myself"/>
+    <div class="w-48 md:w-80 h-auto my-8">
+        <Image src={profileImage} alt="An abstract picture of myself" />
     </div>
 
     <div class="prose lg:prose-xl mx-2 md:mx-4 text-gray-600">
-    <p>Hello there! My name is Nithin, and I am an amateur photographer, shooting regularly since 2023.
-    </p>
-    <p>
-        Away from the camera, most of my time is spent working as a software engineer. I also enjoy reading, bouldering, visiting exhibitions and travelling!
-    </p>
-    <p>If you're interested in the gear I use, all the details can be found <a href="/gear">here.</a></p>
-</div>
-
+        <p>
+            Hello there! My name is Nithin, and I am an amateur photographer,
+            shooting regularly since 2023.
+        </p>
+        <p>
+            I still have lots to learn about photography, so I wanted to create
+            this page to show you my progress over time. I take a camera
+            everywhere I go, shooting street (as I live in London), travel and
+            daily life.
+        </p>
+        <p>
+            Away from the camera, most of my time is spent working as a software
+            engineer. I also enjoy reading, bouldering, visiting exhibitions and
+            travelling!
+        </p>
+        <p>
+            If you're interested in the gear I use, all the details can be found <a
+                href="/gear">here.</a>
+        </p>
+    </div>
 </BaseLayout>
