@@ -2,7 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { getAlbumImages, getPortfolioImages } from "../utils/albums";
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
+import Lightbox from "../components/Lightbox.astro";
 
 // Fetch the portfolio album
 
@@ -10,25 +11,59 @@ import { Image } from "astro:assets";
 
 // Fetch images for the portfolio album
 // const images = await getAlbumImages(portfolio.id);
-const images = await getPortfolioImages();
+const rawImages = await getPortfolioImages();
+
+const images = rawImages
+  ? await Promise.all(
+      rawImages.map(async (image) => {
+        const lightboxAvif = await getImage({
+          src: image.src,
+          format: "avif",
+          width: 1920,
+          quality: "high",
+        });
+        const lightboxWebp = await getImage({
+          src: image.src,
+          format: "webp",
+          width: 1920,
+          quality: "high",
+        });
+        return {
+          ...image,
+          lightboxAvif: lightboxAvif.src,
+          lightboxWebp: lightboxWebp.src,
+        };
+      }),
+    )
+  : [];
 ---
 
-<BaseLayout pageTitle="Minimally Processed" hideTitle=true class="text-center p-8 md:p-16">
+<BaseLayout
+  pageTitle="Minimally Processed"
+  hideTitle="true"
+  class="text-center p-8 md:p-16"
+>
   <div class="text-center">
-
     <div
       class="mx-auto container py-8 px-4 sm:px-8 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 text-center gap-4"
     >
-      {images && images.map((image) => (
-        <Image
-          src={image.src}
-          alt={`Image from portfolio album`}
-          class="rounded border border-transparent mb-4 hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg"
-          loading="lazy"
-        />
-      ))}
+      {
+        images &&
+          images.map((image) => (
+            <Image
+              src={image.src}
+              alt={`Image from portfolio album`}
+              class="rounded border border-transparent mb-4 hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg cursor-zoom-in"
+              loading="lazy"
+              data-lightbox
+              data-lightbox-avif={image.lightboxAvif}
+              data-lightbox-webp={image.lightboxWebp}
+            />
+          ))
+      }
     </div>
   </div>
   <div>
+    <Lightbox />
   </div>
 </BaseLayout>
