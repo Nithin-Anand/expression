@@ -1,0 +1,117 @@
+---
+
+---
+
+<dialog
+    id="lightbox"
+    class="backdrop:bg-black/90 bg-transparent p-0 w-full h-full max-w-none max-h-none m-0 outline-none overflow-hidden"
+>
+    <div
+        id="lightbox-content"
+        class="relative w-full h-full flex items-center justify-center"
+    >
+        <button
+            id="lightbox-close"
+            class="absolute top-4 right-4 z-50 p-2 text-white/70 hover:text-white transition-colors cursor-pointer drop-shadow-md"
+            aria-label="Close lightbox"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <img
+            id="lightbox-img"
+            src=""
+            alt=""
+            class="max-w-[90vw] max-h-[90vh] object-contain shadow-2xl rounded-sm"
+        />
+    </div>
+</dialog>
+
+<script>
+    const dialog = document.getElementById("lightbox") as HTMLDialogElement;
+    const closeBtn = document.getElementById("lightbox-close");
+    const lightboxImg = document.getElementById(
+        "lightbox-img",
+    ) as HTMLImageElement;
+    const lightboxContent = document.getElementById("lightbox-content");
+
+    // Open lightbox
+    document.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        const trigger = target.closest("[data-lightbox]");
+
+        if (trigger) {
+            e.preventDefault();
+            const img = trigger as HTMLImageElement;
+
+            // Use WebP (best Safari compatibility)
+            const webpSrc = trigger.getAttribute("data-lightbox-webp");
+            const imgAlt = img.alt || "";
+
+            if (webpSrc) {
+                lightboxImg.src = webpSrc;
+                lightboxImg.alt = imgAlt;
+                dialog.showModal();
+                document.body.style.overflow = "hidden"; // Prevent scrolling
+            }
+        }
+    });
+
+    // Close lightbox functions
+    const closeLightbox = () => {
+        dialog.close();
+        lightboxImg.src = "";
+        document.body.style.overflow = ""; // Restore scrolling
+    };
+
+    closeBtn?.addEventListener("click", closeLightbox);
+
+    // Close on backdrop click
+    dialog.addEventListener("click", (e) => {
+        // Since the dialog is now full screen, we check if the click target is
+        // the dialog itself or the flex container (empty space around image)
+        if (e.target === dialog || e.target === lightboxContent) {
+            closeLightbox();
+        }
+    });
+
+    // Close on escape key (native dialog behavior handles this, but we need to restore scroll)
+    dialog.addEventListener("close", () => {
+        document.body.style.overflow = "";
+    });
+</script>
+
+<style>
+    dialog::backdrop {
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+
+    dialog[open] {
+        animation: fade-in 0.2s ease-out;
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+</style>

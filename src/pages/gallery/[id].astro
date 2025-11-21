@@ -1,7 +1,8 @@
 ---
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import { getCollection } from "astro:content";
 import { getAlbumImages } from "../../utils/albums";
+import Lightbox from "../../components/Lightbox.astro";
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
@@ -23,7 +24,29 @@ export async function getStaticPaths() {
 }
 
 const { album } = Astro.props;
-const images = await getAlbumImages(album.id);
+const rawImages = await getAlbumImages(album.id);
+
+const images = await Promise.all(
+  rawImages.map(async (image) => {
+    const lightboxAvif = await getImage({
+      src: image,
+      format: "avif",
+      width: 1920,
+      quality: "high",
+    });
+    const lightboxWebp = await getImage({
+      src: image,
+      format: "webp",
+      width: 1920,
+      quality: "high",
+    });
+    return {
+      src: image,
+      lightboxAvif: lightboxAvif.src,
+      lightboxWebp: lightboxWebp.src,
+    };
+  }),
+);
 ---
 
 <BaseLayout pageTitle={album.data.title}>
@@ -32,19 +55,20 @@ const images = await getAlbumImages(album.id);
       {album.data.description}
     </p>
 
-    <div
-      class="mx-auto container my-8 sm:columns-2 md:columns-3 text-center"
-    >
+    <div class="mx-auto container my-8 sm:columns-2 md:columns-3 text-center">
       {
         images.map((image) => (
           <Image
-            src={image}
+            src={image.src}
             alt={`Image from ${album.data.title} album`}
             format="avif"
             quality={50}
-            class="rounded mb-4 border border-transparent hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg"
+            class="rounded mb-4 border border-transparent hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg cursor-zoom-in"
             loading="lazy"
             data-album-image
+            data-lightbox
+            data-lightbox-avif={image.lightboxAvif}
+            data-lightbox-webp={image.lightboxWebp}
           />
         ))
       }
@@ -54,4 +78,6 @@ const images = await getAlbumImages(album.id);
       <a href="/gallery/" class="hover:underline">View other albums</a>
     </p>
   </div>
+  <Lightbox />
 </BaseLayout>
+```
