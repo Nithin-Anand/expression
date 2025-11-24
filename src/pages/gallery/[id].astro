@@ -1,5 +1,6 @@
 ---
-import { Image, getImage } from "astro:assets";
+import { CldImage } from "astro-cloudinary";
+import { getCldImageUrl } from "astro-cloudinary/helpers";
 import { getCollection } from "astro:content";
 import { getAlbumImages } from "../../utils/albums";
 import Lightbox from "../../components/Lightbox.astro";
@@ -26,27 +27,25 @@ export async function getStaticPaths() {
 const { album } = Astro.props;
 const rawImages = await getAlbumImages(album.id);
 
-const images = await Promise.all(
-  rawImages.map(async (image) => {
-    const lightboxAvif = await getImage({
-      src: image,
-      format: "avif",
-      width: 1920,
-      quality: "high",
-    });
-    const lightboxWebp = await getImage({
-      src: image,
-      format: "webp",
-      width: 1920,
-      quality: "high",
-    });
-    return {
-      src: image,
-      lightboxAvif: lightboxAvif.src,
-      lightboxWebp: lightboxWebp.src,
-    };
-  }),
-);
+const images = rawImages.map((image) => {
+  const lightboxAvif = getCldImageUrl({
+    src: image.public_id,
+    format: "avif",
+    width: 1920,
+    quality: "auto",
+  });
+  const lightboxWebp = getCldImageUrl({
+    src: image.public_id,
+    format: "webp",
+    width: 1920,
+    quality: "auto",
+  });
+  return {
+    src: image.public_id, // Use public_id for CldImage
+    lightboxAvif: lightboxAvif,
+    lightboxWebp: lightboxWebp,
+  };
+});
 ---
 
 <BaseLayout pageTitle={album.data.title}>
@@ -58,11 +57,10 @@ const images = await Promise.all(
     <div class="mx-auto container my-8 sm:columns-2 md:columns-3 text-center">
       {
         images.map((image) => (
-          <Image
+          <CldImage
             src={image.src}
             alt={`Image from ${album.data.title} album`}
-            format="avif"
-            quality={50}
+            width={600}
             class="rounded mb-4 border border-transparent hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg cursor-zoom-in"
             loading="lazy"
             data-album-image
