@@ -2,11 +2,11 @@
 title: "Five Tips for Beginner Photographers"
 date: 2025-05-30
 tags: ["photography", "advice"]
-cover: "../albums/misc/NITH0168-2.jpg"
+cover: "../../assets/photos/blog_images/five_beginner_tips/NITH0168-2_xsngta.jpg"
 ---
 As a novice photographer myself, I do not profess to speak with authority on this subject. However, I'm hoping you can gain from some of the advice I've picked up during my journey. 
 
-![Silhouettes in Musee d'Orsay](../albums/misc/NITH0168-2.jpg)
+![Silhouettes in Musee d'Orsay](../../assets/photos/blog_images/five_beginner_tips/NITH0168-2_xsngta.jpg)
 
 ## Shoot as much as you can
 

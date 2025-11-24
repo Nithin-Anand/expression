@@ -1,53 +1,53 @@
 title: Portfolio
 description: My Favourite Images
-cover: ./london_street_2025/DSCF2764.jpg
+cover: DSCF2764_t3ghai
 date: 2050-12-12
 images:
-  - src: ./london_street_2025/DSCF2764.jpg
+  - src: DSCF2764_t3ghai
     caption: "The Poultry Silhouette"
-  - src: ./london_street_2025/DSCF0368.jpg
-    caption: "A man reading in the park at sunset"
-  - src: ./london_street_2025/NITH0035.jpg
-    caption: "A woman in a red hat walking up Millenium Bridge"
-  - src: ./london_street_2025/NITH0629.jpg
-    caption: "Two silhouetted figured in front of St Paul's Cathedral"
-  - src: ./london_street_2025/NITH0835~2.jpg
-    caption: "A silhouetted man in the evening, walking past doors in the Barbican"
-  - src: ./london_street_2025/NITH1126~3.jpg
-    caption: "Two legs visible under a staircase in the Barbican"
-  - src: ./london_street_2025/NITH1189~3.jpg
-    caption: "A man walking into the light, no head visible"
-  - src: ./london_street_2025/NITH1235~3.jpg
-    caption: "Monochrome solo reader in the Barbican, by the water"
-  - src: ./london_street_2025/NITH3048.jpg
-    caption: "The Passerby"
-  - src: ./london_street_2025/NITH3733.jpg
-    caption: "Placeholder caption for NITH3733"
-  - src: ./london_street_2025/NITH3778_1.jpg
-    caption: "Placeholder caption for NITH3778_1"
-  - src: ./london_street_2025/NITH3812_4.jpg
-    caption: "Placeholder caption for NITH3812_4"
-  - src: ./london_street_2025/NITH4047.jpg
-    caption: "Placeholder caption for NITH4047"
-  - src: ./london_street_2025/NITH4052.jpg
-    caption: "Placeholder caption for NITH4052"
-  - src: ./verona/NITH3339.jpg
-    caption: "Dapper silhouette" 
-  - src: ./verona/NITH3246.jpg
-    caption: "A cigarette in the light"
-  - src: ./verona/NITH2678.jpg
-    caption: "Red Umbrella of Verona"
-  - src: ./misc/NITH0168-2.jpg
-    caption: "Silhouettes at Musee d'Orsay"
-  - src: ./misc/NITH1064.jpg
-    caption: "Placeholder caption for NITH1064"
-  - src: ./misc/NITH4618.jpg
-    caption: "Placeholder caption for NITH4618"
-  - src: ./misc/NITH4851.jpg
-    caption: "Placeholder caption for NITH4851"
-  - src: ./misc/NITH7029-3.jpg
-    caption: "Placeholder caption for NITH7029-3"
-  - src: ./urban_landscape/NITH5551.jpg
-    caption: "Classic, cliche view of Parliament in London"
-  - src: ./mallorca/NITH5857.jpg
-    caption: "A couple walking in Palma, palm trees in the background"
+  # - src: ./london_street_2025/DSCF0368.jpg
+  #   caption: "A man reading in the park at sunset"
+  # - src: ./london_street_2025/NITH0035.jpg
+  #   caption: "A woman in a red hat walking up Millenium Bridge"
+  # - src: ./london_street_2025/NITH0629.jpg
+  #   caption: "Two silhouetted figured in front of St Paul's Cathedral"
+  # - src: ./london_street_2025/NITH0835~2.jpg
+  #   caption: "A silhouetted man in the evening, walking past doors in the Barbican"
+  # - src: ./london_street_2025/NITH1126~3.jpg
+  #   caption: "Two legs visible under a staircase in the Barbican"
+  # - src: ./london_street_2025/NITH1189~3.jpg
+  #   caption: "A man walking into the light, no head visible"
+  # - src: ./london_street_2025/NITH1235~3.jpg
+  #   caption: "Monochrome solo reader in the Barbican, by the water"
+  # - src: ./london_street_2025/NITH3048.jpg
+  #   caption: "The Passerby"
+  # - src: ./london_street_2025/NITH3733.jpg
+  #   caption: "Placeholder caption for NITH3733"
+  # - src: ./london_street_2025/NITH3778_1.jpg
+  #   caption: "Placeholder caption for NITH3778_1"
+  # - src: ./london_street_2025/NITH3812_4.jpg
+  #   caption: "Placeholder caption for NITH3812_4"
+  # - src: ./london_street_2025/NITH4047.jpg
+  #   caption: "Placeholder caption for NITH4047"
+  # - src: ./london_street_2025/NITH4052.jpg
+  #   caption: "Placeholder caption for NITH4052"
+  # - src: ./verona/NITH3339.jpg
+  #   caption: "Dapper silhouette" 
+  # - src: ./verona/NITH3246.jpg
+  #   caption: "A cigarette in the light"
+  # - src: ./verona/NITH2678.jpg
+  #   caption: "Red Umbrella of Verona"
+  # - src: ./misc/NITH0168-2.jpg
+  #   caption: "Silhouettes at Musee d'Orsay"
+  # - src: ./misc/NITH1064.jpg
+  #   caption: "Placeholder caption for NITH1064"
+  # - src: ./misc/NITH4618.jpg
+  #   caption: "Placeholder caption for NITH4618"
+  # - src: ./misc/NITH4851.jpg
+  #   caption: "Placeholder caption for NITH4851"
+  # - src: ./misc/NITH7029-3.jpg
+  #   caption: "Placeholder caption for NITH7029-3"
+  # - src: ./urban_landscape/NITH5551.jpg
+  #   caption: "Classic, cliche view of Parliament in London"
+  # - src: ./mallorca/NITH5857.jpg
+  #   caption: "A couple walking in Palma, palm trees in the background"

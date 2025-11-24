@@ -2,7 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { getAlbumImages, getPortfolioImages } from "../utils/albums";
-import { Image, getImage } from "astro:assets";
+import { CldImage } from "astro-cloudinary";
+import { getCldImageUrl } from "astro-cloudinary/helpers";
 import Lightbox from "../components/Lightbox.astro";
 
 // Fetch the portfolio album
@@ -11,30 +12,39 @@ import Lightbox from "../components/Lightbox.astro";
 
 // Fetch images for the portfolio album
 // const images = await getAlbumImages(portfolio.id);
+// Fetch images for the portfolio album
 const rawImages = await getPortfolioImages();
 
+interface PortfolioImage {
+  src: string;
+  caption?: string;
+  width: number;
+  height: number;
+  format: string;
+}
+
 const images = rawImages
-  ? await Promise.all(
-      rawImages.map(async (image) => {
-        const lightboxAvif = await getImage({
-          src: image.src,
-          format: "avif",
-          width: 1920,
-          quality: "high",
-        });
-        const lightboxWebp = await getImage({
-          src: image.src,
-          format: "webp",
-          width: 1920,
-          quality: "high",
-        });
-        return {
-          ...image,
-          lightboxAvif: lightboxAvif.src,
-          lightboxWebp: lightboxWebp.src,
-        };
-      }),
-    )
+  ? rawImages.map((image: PortfolioImage) => {
+      const publicId = image.src;
+      const lightboxAvif = getCldImageUrl({
+        src: publicId,
+        format: "avif",
+        width: 1920,
+        quality: "auto",
+      });
+      const lightboxWebp = getCldImageUrl({
+        src: publicId,
+        format: "webp",
+        width: 1920,
+        quality: "auto",
+      });
+      return {
+        ...image,
+        src: publicId,
+        lightboxAvif: lightboxAvif,
+        lightboxWebp: lightboxWebp,
+      };
+    })
   : [];
 ---
 
@@ -45,14 +55,15 @@ const images = rawImages
 >
   <div class="text-center">
     <div
-      class="mx-auto container py-8 px-4 sm:px-8 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 text-center gap-4"
+      class="mx-auto container py-8 px-4 sm:px-8 sm:columns-2 lg:columns-3 text-center gap-4"
     >
       {
         images &&
-          images.map((image) => (
-            <Image
+          images.map((image: any) => (
+            <CldImage
               src={image.src}
-              alt={`Image from portfolio album`}
+              alt={image.caption || `Image from portfolio album`}
+              width={600}
               class="rounded border border-transparent mb-4 hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg cursor-zoom-in"
               loading="lazy"
               data-lightbox

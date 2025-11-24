@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { CldImage } from "astro-cloudinary";
 import { getCollection } from "astro:content";
 import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -7,40 +7,40 @@ import { date } from "astro:schema";
 
 let albums = await getCollection("albums");
 albums = albums
-    .filter((item) => item.id !== "portfolio")
-    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()
-    );
-
+  .filter((item) => item.id !== "portfolio")
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <BaseLayout pageTitle="Albums">
-    <div class="p-8">
-        <div class="mx-auto container max-w-(--breakpoint-sm) grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {
-            albums.map((item) => (
-              <a
-                href={`/gallery/${item.id}`}
-                class="group transition-all mb-4 block"
-              >
-                <Image
-                  src={item.data.cover}
-                  alt={item.data.title}
-                  format="avif"
-                  width={720}
-                  quality="mid"
-                  class:list={[
-                    "rounded-lg transition-all",
-                    "group-hover:shadow-lg group-hover:opacity-90"
-                  ]}
-                />
-                <div class="mt-4 text-center text-neutral-700">
-                  <strong class="font-normal">{item.data.title}</strong>
-                  <p class="text-xs">{item.data.description}</p>
-                </div>
-              </a>
-            ))
-          }
-        </div>
-      </div>      
+  <div class="p-8">
+    <div
+      class="mx-auto container max-w-(--breakpoint-sm) grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+    >
+      {
+        albums.map((item) => (
+          <a
+            href={`/gallery/${item.id}`}
+            class="group transition-all mb-4 block"
+          >
+            <CldImage
+              src={item.data.cover}
+              alt={item.data.title}
+              width={720}
+              height={480}
+              crop="fill"
+              gravity="center"
+              class:list={[
+                "rounded-lg transition-all",
+                "group-hover:shadow-lg group-hover:opacity-90",
+              ]}
+            />
+            <div class="mt-4 text-center text-neutral-700">
+              <strong class="font-normal">{item.data.title}</strong>
+              <p class="text-xs">{item.data.description}</p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
 </BaseLayout>
-
