@@ -3,11 +3,13 @@ import Hamburger from "./Hamburger.astro";
 import Navigation from "./Navigation.astro";
 
 // Placeholder for the logo file
-import logo from "../assets/logos/horizontal.svg";
-import smallLogo from "../assets/logos/square_no_tag.svg";
+import logo from "../assets/logos/horizontal_serif.svg";
+import smallLogo from "../assets/logos/square_no_tag_serif.svg";
 ---
 
-<header class="flex justify-between items-center w-full mx-8 p-4">
+<header
+    class="flex justify-between items-center w-full px-8 py-4 sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-neutral-100"
+>
     <div class="logo">
         <a href="/" class="flex items-center">
             <img
@@ -18,9 +20,9 @@ import smallLogo from "../assets/logos/square_no_tag.svg";
             <img
                 src={logo.src}
                 alt="MySite Logo"
-                class="w-40 md:w-48 h-12 align-middle hidden md:block"
+                class="h-6 w-auto align-middle hidden md:block"
             />
         </a>
     </div>
-    <Navigation class="align-middle"/>
+    <Navigation class="align-middle" />
 </header>
