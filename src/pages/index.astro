@@ -76,10 +76,10 @@ const images = rawImages
   </section>
   {
     latestPost && (
-      <div class="hidden md:block mx-auto container max-w-5xl px-4 sm:px-8 mb-16">
+      <div class="hidden md:block mx-auto container px-4 sm:px-8 mb-16">
         <a
           href={`/blog/${latestPost.id}`}
-          class="block group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500"
+          class="block group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 max-w-5xl mx-auto"
         >
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 opacity-90 group-hover:opacity-100 transition-opacity" />
           {latestPost.data.cover && (
