@@ -6,7 +6,16 @@
 
 ## ✨ Welcome!
 
-**Minimally Processed** is a clean, modern, Astro-powered site to showcase my favourite images, share photo stories, and blog about my journey as an amateur photographer. I'm making the source code available here so that you can fork it. Until I move to serving the images via CDN, they are contained in this repo. I have made this repo open-source in good faith, please do not use the content (blogs and photos) without permission. 
+**Minimally Processed** is a clean, modern, Astro-powered site to showcase my favourite images, share photo stories, and blog about my journey as an amateur photographer. I'm making the source code available here so that you can fork it. Images are now served via Cloudinary CDN for better performance. I have made this repo open-source in good faith, please do not use the content (blogs and photos) without permission. 
+
+---
+
+## 🚀 Features & Recent Updates
+
+- **CDN Integration**: Images are dynamically fetched and optimized using Cloudinary.
+- **Lightbox**: Implemented a custom lightbox for viewing images in full detail.
+- **Responsive Gallery**: Improved grid layout that adapts seamlessly to different screen sizes.
+- **SEO Optimized**: Enhanced metadata and structure for better search engine visibility.
 
 ---
 
@@ -31,7 +40,7 @@ src/
 - [Astro](https://astro.build/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [@fontsource/poppins](https://fontsource.org/fonts/poppins)
-- [Netlify](https://www.netlify.com/)
+- [Cloudflare Pages](https://pages.cloudflare.com/)
 
 ---
 
