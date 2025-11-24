@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource/playfair-display": "^5.2.8",
     "@fontsource/poppins": "^5.2.6",
     "@fontsource/twinkle-star": "^5.2.5",
     "@tailwindcss/typography": "^0.5.16",

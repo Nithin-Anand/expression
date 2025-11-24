@@ -1,27 +1,33 @@
 ---
-import "../styles/global.css"
+import "../styles/global.css";
 
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import '@fontsource/poppins';
-const { pageTitle, hideTitle=false} = Astro.props;
+import "@fontsource/poppins";
+import "@fontsource/playfair-display";
+const { pageTitle, hideTitle = false } = Astro.props;
 ---
+
 <html lang="en">
-    <head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/jpg" href="/profile_pic.jpg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-    </head>
-    <body class="mx-4">
-        <Header></Header>
-        {!hideTitle &&
-        <h1 class="p-4 sm:p-2 text-2xl text-center md:text-4xl font-bold text-gray-800">{pageTitle}</h1>
-        }
-        <slot />
-        <Footer></Footer>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/jpg" href="/profile_pic.jpg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body class="mx-4">
+    <Header />
+    {
+      !hideTitle && (
+        <h1 class="p-4 sm:p-2 text-2xl text-center md:text-4xl font-bold text-gray-800">
+          {pageTitle}
+        </h1>
+      )
+    }
+    <slot />
+    <Footer />
+  </body>
 </html>
 
 <style>
@@ -30,10 +36,19 @@ const { pageTitle, hideTitle=false} = Astro.props;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background-color: #FFFBFC;
-    color: #24272B;
-    font-family: 'Poppins';
+    background-color: #fffbfc;
+    color: #24272b;
+    font-family: "Poppins", sans-serif;
   }
+</style>
 
-  
+<style is:global>
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Playfair Display", serif;
+  }
 </style>
