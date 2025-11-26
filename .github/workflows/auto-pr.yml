@@ -1,0 +1,29 @@
+name: Auto PR to Main
+
+on:
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if a PR already exists
+          if gh pr list --base main --head dev --state open --json url | grep -q "url"; then
+            echo "PR already exists. Skipping creation."
+          else
+            echo "Creating PR..."
+            gh pr create --base main --head dev --title "Auto PR: Merge dev to main" --body "Automated PR created by GitHub Action on push to dev."
+          fi
