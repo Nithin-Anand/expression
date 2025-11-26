@@ -26,3 +26,16 @@ pnpm-debug.log*
 
 # vscode
 .vscode/
+
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+
+# Generated data (created at build time)
+src/data/stats.json
