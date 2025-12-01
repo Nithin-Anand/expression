@@ -38,4 +38,4 @@ __pycache__/
 venv/
 
 # Generated data (created at build time)
-src/data/stats.json
+public/stats.json
