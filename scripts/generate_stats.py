@@ -91,12 +91,24 @@ def get_recently_added() -> list[dict]:
         from datetime import datetime
         created_at = datetime.fromisoformat(img['created_at'].replace('Z', '+00:00'))
         
+        # Extract folder/album from the image's folder path
+        folder_path = img.get('asset_folder', '')
+        album_id = None
+        album_name = None
+        
+        if folder_path.startswith('albums/'):
+            album_id = folder_path.replace('albums/', '')
+            # Convert album_id to a nice display name (e.g., "london_street_2025" -> "London Street 2025")
+            album_name = album_id.replace('_', ' ').title()
+        
         recent_images.append({
             "public_id": img['public_id'],
             "url": img['secure_url'],
             "created_at": created_at.strftime('%Y-%m-%d'),
             "width": img.get('width', 0),
-            "height": img.get('height', 0)
+            "height": img.get('height', 0),
+            "album_id": album_id,
+            "album_name": album_name
         })
     
     return recent_images

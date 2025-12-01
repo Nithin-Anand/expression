@@ -103,12 +103,27 @@ const timelineData = { labels: timelineLabels, data: timelineCounts };
                 {
                     recently_added.map((img: any) => (
                         <div class="flex flex-col items-center">
-                            <img
-                                src={img.url}
-                                alt={`Recently added on ${img.created_at}`}
-                                class="w-full h-64 object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
-                                loading="lazy"
-                            />
+                            {img.album_id ? (
+                                <a
+                                    href={`/gallery/${img.album_id}`}
+                                    class="block w-full"
+                                    title={`View in the ${img.album_name} album`}
+                                >
+                                    <img
+                                        src={img.url}
+                                        alt={`Recently added on ${img.created_at}`}
+                                        class="w-full h-64 object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+                                        loading="lazy"
+                                    />
+                                </a>
+                            ) : (
+                                <img
+                                    src={img.url}
+                                    alt={`Recently added on ${img.created_at}`}
+                                    class="w-full h-64 object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                                    loading="lazy"
+                                />
+                            )}
                             <p class="text-sm text-gray-600 mt-2 font-serif">
                                 {img.created_at}
                             </p>
