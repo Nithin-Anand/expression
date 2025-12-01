@@ -3,7 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-let stats = { total_count: 0, portfolio_count: 0, album_counts: {} };
+let stats = {
+    total_count: 0,
+    portfolio_count: 0,
+    album_counts: {},
+    upload_timeline: [],
+    recently_added: [],
+};
 
 try {
     const statsPath = path.join(process.cwd(), "public", "stats.json");
@@ -13,15 +19,26 @@ try {
     console.error("Could not read stats.json", e);
 }
 
-const { total_count, portfolio_count, album_counts } = stats;
+const {
+    total_count,
+    portfolio_count,
+    album_counts,
+    upload_timeline,
+    recently_added,
+} = stats;
 
-// Prepare data for the chart
+// Prepare data for the album chart
 const labels = Object.keys(album_counts).map((label) => {
     const name = label.replace("albums/", "").replace(/_/g, " ");
     return name.replace(/\b\w/g, (l) => l.toUpperCase());
 });
 const data = Object.values(album_counts);
 const chartData = { labels, data };
+
+// Prepare data for the timeline chart
+const timelineLabels = upload_timeline.map((item: any) => item.date);
+const timelineCounts = upload_timeline.map((item: any) => item.count);
+const timelineData = { labels: timelineLabels, data: timelineCounts };
 ---
 
 <BaseLayout
@@ -63,6 +80,44 @@ const chartData = { labels, data };
             </div>
         </div>
 
+        <div class="p-8 mb-8">
+            <h2
+                class="text-2xl font-bold text-center mb-8 font-serif text-gray-800"
+            >
+                Upload Timeline
+            </h2>
+            <div class="relative h-[400px] w-full">
+                <canvas
+                    id="timelineChart"
+                    data-stats={JSON.stringify(timelineData)}></canvas>
+            </div>
+        </div>
+
+        <div class="p-8 mb-8">
+            <h2
+                class="text-2xl font-bold text-center mb-8 font-serif text-gray-800"
+            >
+                Recently Added
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {
+                    recently_added.map((img: any) => (
+                        <div class="flex flex-col items-center">
+                            <img
+                                src={img.url}
+                                alt={`Recently added on ${img.created_at}`}
+                                class="w-full h-64 object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                                loading="lazy"
+                            />
+                            <p class="text-sm text-gray-600 mt-2 font-serif">
+                                {img.created_at}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
         <div class="p-8">
             <h2
                 class="text-2xl font-bold text-center mb-8 font-serif text-gray-800"
@@ -80,6 +135,89 @@ const chartData = { labels, data };
 <script>
     import Chart from "chart.js/auto";
 
+    // Timeline Chart
+    const timelineCanvas = document.getElementById(
+        "timelineChart",
+    ) as HTMLCanvasElement;
+
+    if (timelineCanvas) {
+        const timelineStatsData = JSON.parse(
+            timelineCanvas.dataset.stats || '{"labels":[],"data":[]}',
+        );
+
+        new Chart(timelineCanvas, {
+            type: "line",
+            data: {
+                labels: timelineStatsData.labels,
+                datasets: [
+                    {
+                        label: "Total Images",
+                        data: timelineStatsData.data,
+                        borderColor: "#3498DB",
+                        backgroundColor: "rgba(52, 152, 219, 0.1)",
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointHoverRadius: 6,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    tooltip: {
+                        backgroundColor: "rgba(0, 0, 0, 0.8)",
+                        padding: 12,
+                        titleFont: {
+                            family: "'Poppins', sans-serif",
+                            size: 14,
+                        },
+                        bodyFont: {
+                            family: "'Poppins', sans-serif",
+                            size: 13,
+                        },
+                        cornerRadius: 8,
+                    },
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45,
+                            autoSkip: true,
+                            maxTicksLimit: 10,
+                            font: {
+                                family: "'Poppins', sans-serif",
+                                size: 11,
+                            },
+                        },
+                        grid: {
+                            display: false,
+                        },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            font: {
+                                family: "'Poppins', sans-serif",
+                                size: 11,
+                            },
+                        },
+                        grid: {
+                            color: "rgba(0, 0, 0, 0.05)",
+                        },
+                    },
+                },
+            },
+        });
+    }
+
+    // Folder Chart
     const canvas = document.getElementById("folderChart") as HTMLCanvasElement;
 
     if (canvas) {
