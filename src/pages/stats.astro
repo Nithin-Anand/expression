@@ -1,0 +1,307 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import fs from "node:fs/promises";
+import path from "node:path";
+
+let stats = {
+    total_count: 0,
+    portfolio_count: 0,
+    album_counts: {},
+    upload_timeline: [],
+    recently_added: [],
+};
+
+try {
+    const statsPath = path.join(process.cwd(), "public", "stats.json");
+    const statsFile = await fs.readFile(statsPath, "utf-8");
+    stats = JSON.parse(statsFile);
+} catch (e) {
+    console.error("Could not read stats.json", e);
+}
+
+const {
+    total_count,
+    portfolio_count,
+    album_counts,
+    upload_timeline,
+    recently_added,
+} = stats;
+
+// Prepare data for the album chart
+const labels = Object.keys(album_counts).map((label) => {
+    const name = label.replace("albums/", "").replace(/_/g, " ");
+    return name.replace(/\b\w/g, (l) => l.toUpperCase());
+});
+const data = Object.values(album_counts);
+const chartData = { labels, data };
+
+// Prepare data for the timeline chart
+const timelineLabels = upload_timeline.map((item: any) => item.date);
+const timelineCounts = upload_timeline.map((item: any) => item.count);
+const timelineData = { labels: timelineLabels, data: timelineCounts };
+---
+
+<BaseLayout
+    pageTitle="Stats"
+    pageDescription="Fun stats about the photo collection."
+    hideTitle={true}
+>
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <h1
+            class="text-4xl font-bold text-center mb-8 font-serif text-gray-800"
+        >
+            Collection Stats
+        </h1>
+
+        <p
+            class="text-center text-gray-600 text-lg mb-8 max-w-2xl mx-auto hidden md:block"
+        >
+            A nerdy look at some stats of the photo collection - let me know if
+            you have other stats you'd like to see!
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:mb-8 md:mb-16">
+            <div class="p-8 text-center">
+                <h2 class="text-2xl font-bold font-serif text-gray-800 mb-4">
+                    Total Images in Collection
+                </h2>
+                <p class="text-5xl font-bold text-gray-800 font-serif">
+                    {total_count}
+                </p>
+            </div>
+
+            <div class="p-8 text-center">
+                <h2 class="text-2xl font-bold font-serif text-gray-800 mb-4">
+                    Number of Featured Images
+                </h2>
+                <p class="text-5xl font-bold text-gray-800 font-serif">
+                    {portfolio_count}
+                </p>
+            </div>
+        </div>
+
+        <div class="p-8 mb-8">
+            <h2
+                class="text-2xl font-bold text-center mb-8 font-serif text-gray-800"
+            >
+                Upload Timeline
+            </h2>
+            <div class="relative h-[400px] w-full">
+                <canvas
+                    id="timelineChart"
+                    data-stats={JSON.stringify(timelineData)}></canvas>
+            </div>
+        </div>
+
+        <div class="p-8 mb-8">
+            <h2
+                class="text-2xl font-bold text-center mb-8 font-serif text-gray-800"
+            >
+                Recently Added
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {
+                    recently_added.map((img: any) => (
+                        <div class="flex flex-col items-center">
+                            {img.album_id ? (
+                                <a
+                                    href={`/gallery/${img.album_id}`}
+                                    class="block w-full"
+                                    title={`View in the ${img.album_name} album`}
+                                >
+                                    <img
+                                        src={img.url}
+                                        alt={`Recently added on ${img.created_at}`}
+                                        class="w-full h-64 object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+                                        loading="lazy"
+                                    />
+                                </a>
+                            ) : (
+                                <img
+                                    src={img.url}
+                                    alt={`Recently added on ${img.created_at}`}
+                                    class="w-full h-64 object-cover rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                                    loading="lazy"
+                                />
+                            )}
+                            <p class="text-sm text-gray-600 mt-2 font-serif">
+                                {img.created_at}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+        <div class="p-8">
+            <h2
+                class="text-2xl font-bold text-center mb-8 font-serif text-gray-800"
+            >
+                Total Images in Each Album
+            </h2>
+            <div class="relative h-[400px] w-full">
+                <canvas id="folderChart" data-stats={JSON.stringify(chartData)}
+                ></canvas>
+            </div>
+        </div>
+    </div>
+</BaseLayout>
+
+<script>
+    import Chart from "chart.js/auto";
+
+    // Timeline Chart
+    const timelineCanvas = document.getElementById(
+        "timelineChart",
+    ) as HTMLCanvasElement;
+
+    if (timelineCanvas) {
+        const timelineStatsData = JSON.parse(
+            timelineCanvas.dataset.stats || '{"labels":[],"data":[]}',
+        );
+
+        new Chart(timelineCanvas, {
+            type: "line",
+            data: {
+                labels: timelineStatsData.labels,
+                datasets: [
+                    {
+                        label: "Total Images",
+                        data: timelineStatsData.data,
+                        borderColor: "#3498DB",
+                        backgroundColor: "rgba(52, 152, 219, 0.1)",
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointHoverRadius: 6,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                    tooltip: {
+                        backgroundColor: "rgba(0, 0, 0, 0.8)",
+                        padding: 12,
+                        titleFont: {
+                            family: "'Poppins', sans-serif",
+                            size: 14,
+                        },
+                        bodyFont: {
+                            family: "'Poppins', sans-serif",
+                            size: 13,
+                        },
+                        cornerRadius: 8,
+                    },
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45,
+                            autoSkip: true,
+                            maxTicksLimit: 10,
+                            font: {
+                                family: "'Poppins', sans-serif",
+                                size: 11,
+                            },
+                        },
+                        grid: {
+                            display: false,
+                        },
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            font: {
+                                family: "'Poppins', sans-serif",
+                                size: 11,
+                            },
+                        },
+                        grid: {
+                            color: "rgba(0, 0, 0, 0.05)",
+                        },
+                    },
+                },
+            },
+        });
+    }
+
+    // Folder Chart
+    const canvas = document.getElementById("folderChart") as HTMLCanvasElement;
+
+    if (canvas) {
+        const statsData = JSON.parse(
+            canvas.dataset.stats || '{"labels":[],"data":[]}',
+        );
+
+        new Chart(canvas, {
+            type: "doughnut",
+            data: {
+                labels: statsData.labels,
+                datasets: [
+                    {
+                        label: "Images",
+                        data: statsData.data,
+                        backgroundColor: [
+                            "#FF6384",
+                            "#36A2EB",
+                            "#FFCE56",
+                            "#4BC0C0",
+                            "#9966FF",
+                            "#FF9F40",
+                            "#E74C3C",
+                            "#3498DB",
+                            "#2ECC71",
+                            "#F39C12",
+                        ],
+                        borderColor: "#ffffff",
+                        borderWidth: 1,
+                        hoverOffset: 4,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: "bottom",
+                        labels: {
+                            padding: 20,
+                            font: {
+                                family: "'Poppins', sans-serif",
+                                size: 12,
+                            },
+                            usePointStyle: true,
+                        },
+                    },
+                    tooltip: {
+                        backgroundColor: "rgba(0, 0, 0, 0.8)",
+                        padding: 12,
+                        titleFont: {
+                            family: "'Poppins', sans-serif",
+                            size: 14,
+                        },
+                        bodyFont: {
+                            family: "'Poppins', sans-serif",
+                            size: 13,
+                        },
+                        cornerRadius: 8,
+                        displayColors: true,
+                    },
+                },
+                cutout: "60%",
+                animation: {
+                    animateScale: true,
+                    animateRotate: true,
+                },
+            },
+        });
+    }
+</script>
