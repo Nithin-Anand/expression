@@ -3,7 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-let stats = {
+let stats: {
+    total_count: number;
+    portfolio_count: number;
+    album_counts: Record<string, number>;
+    upload_timeline: { date: string; count: number }[];
+    recently_added: any[];
+} = {
     total_count: 0,
     portfolio_count: 0,
     album_counts: {},
@@ -36,8 +42,41 @@ const data = Object.values(album_counts);
 const chartData = { labels, data };
 
 // Prepare data for the timeline chart
-const timelineLabels = upload_timeline.map((item: any) => item.date);
-const timelineCounts = upload_timeline.map((item: any) => item.count);
+let filledTimeline: { date: string; count: number }[] = [];
+if (upload_timeline && upload_timeline.length > 0) {
+    const startDate = new Date(upload_timeline[0].date);
+    const endDate = new Date(upload_timeline[upload_timeline.length - 1].date);
+
+    // Create a map for quick lookup
+    const timelineMap = new Map(
+        upload_timeline.map((item: any) => [item.date, item.count]),
+    );
+
+    let currentDate = new Date(startDate);
+    let lastCount = 0;
+
+    // Iterate day by day
+    while (currentDate <= endDate) {
+        const dateString = currentDate.toISOString().split("T")[0];
+
+        if (timelineMap.has(dateString)) {
+            lastCount = timelineMap.get(dateString);
+        }
+
+        filledTimeline.push({
+            date: dateString,
+            count: lastCount,
+        });
+
+        // Move to next day
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
+} else {
+    filledTimeline = upload_timeline || [];
+}
+
+const timelineLabels = filledTimeline.map((item: any) => item.date);
+const timelineCounts = filledTimeline.map((item: any) => item.count);
 const timelineData = { labels: timelineLabels, data: timelineCounts };
 ---
 
@@ -171,7 +210,7 @@ const timelineData = { labels: timelineLabels, data: timelineCounts };
                         backgroundColor: "rgba(52, 152, 219, 0.1)",
                         borderWidth: 2,
                         fill: true,
-                        tension: 0.4,
+                        tension: 0.0,
                         pointRadius: 3,
                         pointHoverRadius: 6,
                     },

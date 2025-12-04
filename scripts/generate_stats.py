@@ -70,15 +70,33 @@ def get_upload_timeline() -> list[dict]:
     
     # Sort dates and calculate cumulative
     sorted_dates = sorted(date_counts.keys())
+    
+    if not sorted_dates:
+        return []
+
+    from datetime import timedelta
+    
+    # Parse start and end dates
+    start_date = datetime.strptime(sorted_dates[0], '%Y-%m-%d')
+    end_date = datetime.strptime(sorted_dates[-1], '%Y-%m-%d')
+    
     cumulative = 0
     timeline_data = []
     
-    for date in sorted_dates:
-        cumulative += date_counts[date]
+    current_date = start_date
+    while current_date <= end_date:
+        date_str = current_date.strftime('%Y-%m-%d')
+        
+        # Add counts for this day if any
+        if date_str in date_counts:
+            cumulative += date_counts[date_str]
+            
         timeline_data.append({
-            "date": date,
+            "date": date_str,
             "count": cumulative
         })
+        
+        current_date += timedelta(days=1)
     
     return timeline_data
 
