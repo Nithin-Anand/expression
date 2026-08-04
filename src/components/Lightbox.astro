@@ -91,6 +91,17 @@
     let galleryImages: HTMLElement[] = [];
     let currentIndex = -1;
 
+    // Warm the browser cache with the adjacent photos so arrow/swipe
+    // navigation feels instant instead of waiting on a fresh network fetch.
+    const preloadNeighbors = (index: number) => {
+        const n = galleryImages.length;
+        if (n <= 1) return;
+        for (const i of [(index + 1) % n, (index - 1 + n) % n]) {
+            const url = galleryImages[i]?.getAttribute("data-lightbox-webp");
+            if (url) new Image().src = url;
+        }
+    };
+
     // Render the photo at the given index (reuses the data-lightbox-webp + alt
     // convention shared by every thumbnail).
     const showImageAt = (index: number) => {
@@ -104,6 +115,7 @@
         currentIndex = index;
         lightboxImg.src = webpSrc;
         lightboxImg.alt = (el as HTMLImageElement).alt || "";
+        preloadNeighbors(index);
     };
 
     // Move by dir (-1 = previous, +1 = next), wrapping around at the ends.
