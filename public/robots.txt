@@ -1,4 +1,6 @@
-# Block AI scrapers and crawlers used for training AI models
+# Request that named AI training, search, and user-fetch agents do not crawl.
+# robots.txt is advisory: it does not deny HTTP requests or cover other hosts.
+# Enforce AI bot access policies separately in Cloudflare.
 
 # OpenAI
 User-agent: GPTBot
@@ -16,6 +18,16 @@ User-agent: CCBot
 Disallow: /
 
 # Anthropic
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-SearchBot
+Disallow: /
+
+User-agent: Claude-User
+Disallow: /
+
+# Legacy Anthropic names
 User-agent: anthropic-ai
 Disallow: /
 
@@ -30,7 +42,19 @@ Disallow: /
 User-agent: PerplexityBot
 Disallow: /
 
+User-agent: Perplexity-User
+Disallow: /
+
 # Meta/Facebook
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: meta-externalfetcher
+Disallow: /
+
+User-agent: Meta-WebIndexer
+Disallow: /
+
 User-agent: FacebookBot
 Disallow: /
 
@@ -62,6 +86,18 @@ User-agent: Img2Dataset
 Disallow: /
 
 User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: Google-CloudVertexBot
+Disallow: /
+
+User-agent: DuckAssistBot
+Disallow: /
+
+User-agent: MistralAI-User
+Disallow: /
+
+User-agent: MistralAI-Training
 Disallow: /
 
 # Allow legitimate search engines

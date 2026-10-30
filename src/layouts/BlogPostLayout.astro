@@ -1,7 +1,27 @@
 ---
-const {frontmatter} = Astro.props;
 import BaseLayout from "./BaseLayout.astro";
+import PageContainer from "../components/PageContainer.astro";
+import Prose from "../components/Prose.astro";
+import { formatDate } from "../lib/dates";
+
+interface Props {
+  title: string;
+  description?: string;
+  date: Date;
+  image?: string;
+}
+const { title, description, date, image } = Astro.props;
 ---
-<BaseLayout pageTitle={frontmatter.title}>
+
+<BaseLayout pageTitle={title} pageDescription={description} pageImage={image} pageType="article">
+  <PageContainer size="reading">
+    <article>
+      <p class="mb-6 text-sm text-neutral-500">
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+      </p>
+      <Prose>
         <slot />
+      </Prose>
+    </article>
+  </PageContainer>
 </BaseLayout>

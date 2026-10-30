@@ -1,95 +1,21 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
-import { getAlbumImages, getPortfolioImages } from "../utils/albums";
-import { CldImage } from "astro-cloudinary";
-import { getCldImageUrl } from "astro-cloudinary/helpers";
-import Lightbox from "../components/Lightbox.astro";
+import PageContainer from "../components/PageContainer.astro";
+import PhotoGrid from "../components/gallery/PhotoGrid.astro";
+import Lightbox from "../components/gallery/Lightbox.astro";
+import { getAlbumPhotos } from "../data/photos";
 
-// Fetch the portfolio album
-
-// Ensure the portfolio album exists
-
-// Fetch images for the portfolio album
-// const images = await getAlbumImages(portfolio.id);
-// Fetch images for the portfolio album
-const rawImages = await getPortfolioImages();
-
-// Fetch latest blog post
-const allPosts = await getCollection("blog");
-const sortedPosts = allPosts
-  .filter((post) => post.data.draft !== true)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const latestPost = sortedPosts.length > 0 ? sortedPosts[0] : null;
-
-interface PortfolioImage {
-  src: string;
-  caption?: string;
-  width: number;
-  height: number;
-  format: string;
-}
-
-const images = rawImages
-  ? rawImages.map((image: PortfolioImage) => {
-      const publicId = image.src;
-      const lightboxAvif = getCldImageUrl({
-        src: publicId,
-        format: "avif",
-        width: 1920,
-        quality: "auto",
-      });
-      const lightboxWebp = getCldImageUrl({
-        src: publicId,
-        format: "webp",
-        width: 1920,
-        quality: "auto",
-      });
-      return {
-        ...image,
-        src: publicId,
-        lightboxAvif: lightboxAvif,
-        lightboxWebp: lightboxWebp,
-      };
-    })
-  : [];
+const photos = await getAlbumPhotos("portfolio");
 ---
 
 <BaseLayout
   pageTitle="Minimally Processed"
   pageDescription="Photography by Nithin Anand."
-  hideTitle="true"
-  class="text-center"
+  hideTitle
 >
-  <!-- Hero Section -->
-  <section class="pt-8 pb-2 px-4 text-center">
-    <h1 class="sr-only">Minimally Processed</h1>
-  </section>
-
-  <div class="text-center">
-    <div
-      class="mx-auto container py-4 px-4 sm:px-8 sm:columns-2 lg:columns-3 text-center gap-4"
-    >
-      {
-        images &&
-          images.map((image: any) => (
-            <CldImage
-              src={image.src}
-              alt={image.caption || `Image from portfolio album`}
-              width={600}
-              width={600}
-              class="rounded-lg mb-4 hover:shadow-2xl transition-all duration-500 ease-out hover:-translate-y-1 cursor-zoom-in"
-              loading="lazy"
-              data-lightbox
-              data-lightbox-avif={image.lightboxAvif}
-              data-lightbox-webp={image.lightboxWebp}
-            />
-          ))
-      }
-    </div>
-  </div>
-  <div>
-    <Lightbox />
-  </div>
+  <h1 class="sr-only">Minimally Processed</h1>
+  <PageContainer>
+    <PhotoGrid photos={photos} title="Portfolio" />
+  </PageContainer>
+  <Lightbox />
 </BaseLayout>

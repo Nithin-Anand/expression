@@ -1,0 +1,49 @@
+---
+interface Props {
+  title: string;
+  kind: "line" | "doughnut";
+  labels: string[];
+  values: number[];
+}
+const { title, kind, labels, values } = Astro.props;
+---
+
+<section class="mb-12">
+  <h2 class="mb-4 text-center text-2xl font-bold">{title}</h2>
+  <div class="relative h-[400px]">
+    <canvas
+      data-chart={kind}
+      data-stats={JSON.stringify({ labels, values })}
+      role="img"
+      aria-label={`${title}. A data table follows.`}
+    ></canvas>
+  </div>
+  <details class="mt-4 text-sm text-neutral-600">
+    <summary class="cursor-pointer">View chart data</summary>
+    <div class="mt-3 max-h-72 overflow-auto">
+      <table class="w-full text-left">
+        <caption class="sr-only">{title}</caption>
+        <thead>
+          <tr>
+            <th scope="col">{kind === "line" ? "Date" : "Album"}</th>
+            <th scope="col">Photographs</th>
+          </tr>
+        </thead>
+        <tbody>
+          {labels.map((label, index) => (
+            <tr>
+              <th scope="row" class="font-normal">
+                {label}
+              </th>
+              <td>{values[index]}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </details>
+</section>
+<script>
+  import { initStatsCharts } from "../../scripts/stats-charts";
+  initStatsCharts();
+</script>

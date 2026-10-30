@@ -1,5 +1,6 @@
 # build output
 dist/
+dist-fixture/
 
 # generated types
 .astro/
@@ -36,6 +37,3 @@ __pycache__/
 *.so
 .Python
 venv/
-
-# Generated data (created at build time)
-public/stats.json

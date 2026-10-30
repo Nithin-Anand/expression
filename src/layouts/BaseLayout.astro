@@ -6,23 +6,36 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "@fontsource/poppins";
 import "@fontsource/playfair-display";
-const { pageTitle, hideTitle = false, pageDescription } = Astro.props;
+interface Props {
+  pageTitle: string;
+  hideTitle?: boolean;
+  pageDescription?: string;
+  pageImage?: string;
+  pageType?: "website" | "article";
+}
+const { pageTitle, hideTitle = false, pageDescription, pageImage, pageType } = Astro.props;
 ---
 
 <html lang="en">
   <head>
-    <SEO title={pageTitle} description={pageDescription} />
+    <SEO title={pageTitle} description={pageDescription} image={pageImage} type={pageType} />
   </head>
-  <body class="mx-4">
+  <body class="mx-4 min-h-screen">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-white focus:p-3"
+    >
+      Skip to content
+    </a>
     <Header />
-    {
-      !hideTitle && (
+    <main id="main-content" class="w-full flex-1">
+      {!hideTitle && (
         <h1 class="p-4 sm:p-2 text-2xl text-center md:text-4xl font-bold text-gray-800">
           {pageTitle}
         </h1>
-      )
-    }
-    <slot />
+      )}
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>
