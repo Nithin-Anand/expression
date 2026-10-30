@@ -1,54 +1,54 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Prose from "../components/Prose.astro";
+import PageContainer from "../components/PageContainer.astro";
 ---
 
-<BaseLayout pageTitle="My Gear">
-    <Prose>
-        <h2>Main Setup</h2>
-        <p>
-            I use the Fujifilm X-Series as my camera system, having switched
-            from Micro Four Thirds in 2023.
-            <h3>Body: Fujifilm X-T5</h3>
-            <p>
-                This was a camera that I considered aspirational when I started
-                photography in 2022, so I feel lucky to own one now. The 40MP
-                sensor and IBIS provide great image quality, in a relatively
-                compact package. It's quite feature-rich for the size, and a joy
-                to use.
-            </p>
-            <h3>Normal Prime: Fujifilm XF 33mm f/1.4 R LM WR</h3>
-            <p>
-                I gravitate to 50mm (FF equivalent) primes, and this one is
-                stellar. I was using the 35mm f/1.4 R, which I loved. However, I
-                upgraded to this lens because of the weather-sealing. I was
-                initially concerned about its size, but in practice I've found
-                it to be small enough for all-day use.
-            </p>
-            <h3>General Purpose Zoom: Fujifilm XF 16-50 f/2.8-4.8 R LM WR</h3>
-            <p>
-                Mostly used for travel, this lens is excellent in its role.
-                Being lightweight, compact and weather-resistant, it can tackle
-                many scenarios without getting in the way. My only criticism is
-                that the aperture dims quite quickly, which doesn't suit my
-                preference of shooting at longer focal lengths.
-            </p>
-            <h3>Telephoto Zoom: Fujifilm XF 70-300 f/4-5.6 R LM OIS WR</h3>
-            <p>
-                I rented this lens for a couple of days before purchasing and
-                was instantly sold on it. It's lightweight, reasonably compact
-                and rugged, but provides a versatile focal range of 105-450 FF
-                equivalent. Great for long-distance landscape, travel and some
-                wildlife. Forms a great pairing with the 16-50.
-            </p>
-        </p>
-        <h3>Daily Carry: Fujfilm X100F</h3>
-        <p>
-            A great compact camera. I keep it in a leather case and just throw
-            it in my backpack or sling when I'm not taking my full set-up. The
-            autofocus isn't fast but it does work (unlike my old Ricoh GR2), the
-            flash is great for that stark, 'retro' look and the image quality
-            still holds up today.
-        </p>
-    </Prose></BaseLayout
+<BaseLayout
+  pageTitle="My Gear"
+  pageDescription="The cameras and lenses Nithin Anand uses for photography."
 >
+  <PageContainer size="reading">
+    <Prose>
+      <h2>Main Setup</h2>
+      <p>
+        I use the Fujifilm X-Series as my camera system, having switched from Micro Four Thirds in
+        2023.
+      </p>
+      <h3>Body: Fujifilm X-T5</h3>
+      <p>
+        This was a camera that I considered aspirational when I started photography in 2022, so I
+        feel lucky to own one now. The 40MP sensor and IBIS provide great image quality, in a
+        relatively compact package. It's quite feature-rich for the size, and a joy to use.
+      </p>
+      <h3>Normal Prime: Fujifilm XF 33mm f/1.4 R LM WR</h3>
+      <p>
+        I gravitate to 50mm (FF equivalent) primes, and this one is stellar. I was using the 35mm
+        f/1.4 R, which I loved. However, I upgraded to this lens because of the weather-sealing. I
+        was initially concerned about its size, but in practice I've found it to be small enough for
+        all-day use.
+      </p>
+      <h3>General Purpose Zoom: Fujifilm XF 16-50 f/2.8-4.8 R LM WR</h3>
+      <p>
+        Mostly used for travel, this lens is excellent in its role. Being lightweight, compact and
+        weather-resistant, it can tackle many scenarios without getting in the way. My only
+        criticism is that the aperture dims quite quickly, which doesn't suit my preference of
+        shooting at longer focal lengths.
+      </p>
+      <h3>Telephoto Zoom: Fujifilm XF 70-300 f/4-5.6 R LM OIS WR</h3>
+      <p>
+        I rented this lens for a couple of days before purchasing and was instantly sold on it. It's
+        lightweight, reasonably compact and rugged, but provides a versatile focal range of 105-450
+        FF equivalent. Great for long-distance landscape, travel and some wildlife. Forms a great
+        pairing with the 16-50.
+      </p>
+      <h3>Daily Carry: Fujfilm X100F</h3>
+      <p>
+        A great compact camera. I keep it in a leather case and just throw it in my backpack or
+        sling when I'm not taking my full set-up. The autofocus isn't fast but it does work (unlike
+        my old Ricoh GR2), the flash is great for that stark, 'retro' look and the image quality
+        still holds up today.
+      </p>
+    </Prose>
+  </PageContainer>
+</BaseLayout>

@@ -3,7 +3,7 @@ name: Scheduled Rebuild
 on:
   schedule:
     # Runs at midnight UTC
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
   workflow_dispatch: # Allows manual triggering from GitHub UI
 
 jobs:
@@ -12,4 +12,4 @@ jobs:
     steps:
       - name: Trigger Cloudflare Pages Rebuild
         run: |
-          curl -X POST "${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}"
+          curl --fail-with-body --show-error -X POST "${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}"

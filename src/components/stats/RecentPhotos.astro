@@ -1,0 +1,41 @@
+---
+import type { PhotoStats } from "../../lib/stats";
+import CloudinaryImage from "../CloudinaryImage.astro";
+import { formatDate } from "../../lib/dates";
+interface Props {
+  photos: PhotoStats["recently_added"];
+}
+const { photos } = Astro.props;
+---
+
+<section class="mb-12">
+  <h2 class="mb-4 text-center text-2xl font-bold">Recently Added</h2>
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+    {photos.map((photo) => {
+      const Tag = photo.album_id ? "a" : "div";
+      return (
+        <figure>
+          <Tag
+            href={photo.album_id ? `/gallery/${photo.album_id}/` : undefined}
+            class="block w-full"
+            aria-label={photo.album_name ? `View ${photo.album_name}` : undefined}
+          >
+            <CloudinaryImage
+              src={photo.public_id}
+              alt={photo.caption || `Photograph added on ${formatDate(photo.created_at)}`}
+              width={480}
+              height={480}
+              crop="fill"
+              gravity="center"
+              sizes="(min-width: 768px) 320px, 100vw"
+              class="h-64 w-full rounded-lg object-cover shadow-md transition-shadow hover:shadow-xl"
+            />
+          </Tag>
+          <figcaption class="mt-2 text-center text-sm text-neutral-600">
+            <time datetime={photo.created_at}>{formatDate(photo.created_at)}</time>
+          </figcaption>
+        </figure>
+      );
+    })}
+  </div>
+</section>

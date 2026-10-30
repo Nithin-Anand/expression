@@ -1,0 +1,51 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { getCloudinaryImageUrl } from "../lib/cloudinary";
+
+interface Props extends Omit<HTMLAttributes<"img">, "src" | "srcset" | "width" | "height"> {
+  src: string;
+  alt: string;
+  width: number;
+  height?: number;
+  crop?: "limit" | "fill";
+  gravity?: "center" | "auto";
+}
+
+const {
+  src,
+  width,
+  height,
+  crop = "limit",
+  gravity,
+  sizes = `(min-width: ${width}px) ${width}px, 100vw`,
+  loading = "lazy",
+  decoding = "async",
+  style,
+  ...attributes
+} = Astro.props;
+
+const widths = [...new Set([320, 480, 640, 750, 828, 960, 1080, width, width * 2])]
+  .filter((candidate) => candidate <= width * 2)
+  .sort((a, b) => a - b);
+
+const imageUrl = (candidate: number) =>
+  getCloudinaryImageUrl({
+    src,
+    width: candidate,
+    height: height ? Math.round((height * candidate) / width) : undefined,
+    crop,
+    gravity,
+  });
+---
+
+<img
+  {...attributes}
+  src={imageUrl(width)}
+  srcset={widths.map((candidate) => `${imageUrl(candidate)} ${candidate}w`).join(", ")}
+  sizes={sizes}
+  width={width}
+  height={height}
+  loading={loading}
+  decoding={decoding}
+  style={style}
+/>

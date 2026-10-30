@@ -1,80 +1,64 @@
 ---
-import { CldImage } from "astro-cloudinary";
-import { getCldImageUrl } from "astro-cloudinary/helpers";
-import { getCollection } from "astro:content";
-import { getAlbumImages } from "../../utils/albums";
-import Lightbox from "../../components/Lightbox.astro";
-
+import type { InferGetStaticPropsType } from "astro";
+import { getAlbums } from "../../data/content";
+import { getAlbumPhotos } from "../../data/photos";
+import { formatDate } from "../../lib/dates";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageContainer from "../../components/PageContainer.astro";
+import PhotoGrid from "../../components/gallery/PhotoGrid.astro";
+import Lightbox from "../../components/gallery/Lightbox.astro";
 
 export async function getStaticPaths() {
-  const albums = await getCollection("albums");
-
-  const paths = Object.values(albums).map((album) => {
-    return {
-      params: {
-        id: album.id,
-      },
-      props: {
-        album,
-      },
-    };
-  });
-
-  return paths;
+  return (await getAlbums()).map((album) => ({ params: { id: album.id }, props: { album } }));
 }
-
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { album } = Astro.props;
-const rawImages = await getAlbumImages(album.id);
-
-const images = rawImages.map((image) => {
-  const lightboxAvif = getCldImageUrl({
-    src: image.public_id,
-    format: "avif",
-    width: 1920,
-    quality: "auto",
-  });
-  const lightboxWebp = getCldImageUrl({
-    src: image.public_id,
-    format: "webp",
-    width: 1920,
-    quality: "auto",
-  });
-  return {
-    src: image.public_id, // Use public_id for CldImage
-    lightboxAvif: lightboxAvif,
-    lightboxWebp: lightboxWebp,
-  };
-});
+const photos = await getAlbumPhotos(album.id);
+const essayParagraphs =
+  album.data.essay
+    ?.split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean) ?? [];
 ---
 
-<BaseLayout pageTitle={album.data.title}>
-  <div class="text-center">
-    <p class="text-xl my-4">
-      {album.data.description}
-    </p>
-
-    <div class="mx-auto container my-8 sm:columns-2 md:columns-3 text-center">
-      {
-        images.map((image) => (
-          <CldImage
-            src={image.src}
-            alt={`Image from ${album.data.title} album`}
-            width={600}
-            class="rounded mb-4 border border-transparent hover:border-gray-300 transition-all duration-300 ease-in-out hover:shadow-lg cursor-zoom-in"
-            loading="lazy"
-            data-album-image
-            data-lightbox
-            data-lightbox-avif={image.lightboxAvif}
-            data-lightbox-webp={image.lightboxWebp}
-          />
-        ))
-      }
-    </div>
-
-    <p class="text-lg my-4 text-center">
-      <a href="/gallery/" class="hover:underline">View other albums</a>
-    </p>
-  </div>
+<BaseLayout pageTitle={album.data.title} pageDescription={album.data.description} hideTitle>
+  <article>
+    <header class="mx-auto max-w-3xl px-4 pb-8 pt-10 text-center sm:pt-16">
+      {album.data.showDate && (
+        <p class="mb-4 text-xs font-medium uppercase tracking-[0.28em] text-neutral-500">
+          <time datetime={album.data.date.toISOString()}>{formatDate(album.data.date, true)}</time>
+        </p>
+      )}
+      <h1 class="text-4xl font-bold leading-tight text-neutral-800 sm:text-6xl">
+        {album.data.title}
+      </h1>
+      {album.data.description && (
+        <p class="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-neutral-600 sm:text-xl">
+          {album.data.description}
+        </p>
+      )}
+      <p class="mt-5 text-xs uppercase tracking-[0.2em] text-neutral-500">
+        {photos.length} {photos.length === 1 ? "photograph" : "photographs"}
+      </p>
+    </header>
+    {essayParagraphs.length > 0 && (
+      <div class="prose prose-neutral mx-auto max-w-2xl px-4 pb-8 sm:prose-lg">
+        {essayParagraphs.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+    )}
+    <PageContainer>
+      <PhotoGrid photos={photos} title={album.data.title} showCaptions />
+    </PageContainer>
+    <footer class="my-12 text-center">
+      <a
+        href="/gallery/"
+        class="text-sm uppercase tracking-[0.18em] text-neutral-500 hover:text-neutral-900"
+      >
+        View other albums
+      </a>
+    </footer>
+  </article>
   <Lightbox />
 </BaseLayout>

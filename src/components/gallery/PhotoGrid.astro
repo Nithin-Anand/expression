@@ -1,0 +1,47 @@
+---
+import type { Photo } from "../../data/photos";
+import CloudinaryImage from "../CloudinaryImage.astro";
+import { getCloudinaryImageUrl } from "../../lib/cloudinary";
+
+interface Props {
+  photos: Photo[];
+  title: string;
+  showCaptions?: boolean;
+}
+const { photos, title, showCaptions = false } = Astro.props;
+---
+
+<div class="columns-1 gap-5 sm:columns-2 lg:columns-3" aria-label={`${title} photographs`}>
+  {photos.map((photo, index) => {
+    const alt = photo.caption || `Photograph ${index + 1} from ${title}`;
+    const lightboxUrl = getCloudinaryImageUrl({ src: photo.id, width: 1920, format: "webp" });
+    return (
+      <figure class="mb-5 break-inside-avoid">
+        <button
+          type="button"
+          class="block w-full cursor-zoom-in rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-800"
+          aria-label={`View ${alt}`}
+          aria-haspopup="dialog"
+          data-lightbox
+          data-lightbox-webp={lightboxUrl}
+        >
+          <CloudinaryImage
+            src={photo.id}
+            alt={alt}
+            width={600}
+            height={Math.round((600 * photo.height) / photo.width)}
+            class="w-full rounded transition-shadow duration-300 hover:shadow-lg"
+            sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
+            loading={index === 0 ? "eager" : "lazy"}
+            fetchpriority={index === 0 ? "high" : "auto"}
+          />
+        </button>
+        {showCaptions && photo.caption && (
+          <figcaption class="px-1 pt-2 text-left text-sm leading-relaxed text-neutral-500">
+            {photo.caption}
+          </figcaption>
+        )}
+      </figure>
+    );
+  })}
+</div>

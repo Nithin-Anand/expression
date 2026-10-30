@@ -1,18 +1,18 @@
 ---
 interface Props {
-    title: string;
-    description: string;
-    image?: string;
-    url?: string;
-    type?: string;
+  title: string;
+  description?: string;
+  image?: string;
+  url?: string | URL;
+  type?: "website" | "article";
 }
 
 const {
-    title,
-    description,
-    image = "/profile_pic.jpg",
-    url = Astro.url,
-    type = "website",
+  title,
+  description = "Photography by Nithin Anand. Street, travel and abstract photography.",
+  image = "/profile_pic.jpg",
+  url = new URL(Astro.url.pathname, Astro.site),
+  type = "website",
 } = Astro.props;
 
 const siteTitle = "Minimally Processed";
@@ -25,6 +25,7 @@ const absoluteImageUrl = new URL(image, Astro.site);
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/jpg" href="/profile_pic.jpg" />
 <meta name="generator" content={Astro.generator} />
+<link rel="canonical" href={url} />
 
 <!-- Primary Meta Tags -->
 <title>{fullTitle}</title>
